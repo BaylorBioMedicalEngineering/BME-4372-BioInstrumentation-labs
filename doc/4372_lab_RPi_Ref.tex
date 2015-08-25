@@ -1,0 +1,57 @@
+\chapter{Raspberry Pi Ref}\label{chapter:RPiRef}
+
+\section{Preparing Your Pi}
+
+The Raspberry Pi can use a variety of OS's, but its basic one is a Linux distro.
+
+\begin{description}
+  \item[sudo] runs the command after it as another user, who is by default the super user, hence the name Super User DO.
+  \item[apt-get] patches and upgrades the system and applications.
+\end{description}
+
+sudo apt-get update %get the latest version
+
+sudo apt-get upgrade %upgrade what you have to what you updated
+
+sudo apt-get install git %install git, great way to get lots of code
+
+sudo apt-get install python-dev %install python development
+
+sudo apt-get install python-rpi.gpi %install python raspberry pi gpio tools
+
+\section{getting code}
+
+git clone http://github.com/adafruit/Adafruit-Raspberry-Pi-Python-Code.git
+
+cd Adafruit-Raspberry-Pi-Python-Code
+
+ls
+
+\section{coding}
+
+For Raspberry Pi
+
+The simplest way to ensure some cleanup code gets run is to wrap your while loop in a try/finally block.
+
+If you specifically want to catch Ctrl+C but nothing else, you can use try/except to catch KeyboardInterrupt.
+
+Finally, if you want a more robust way to ensure some cleanup gets done, take a look at lines 312 through 322 in this revision of my Procrastinator's Timeclock utility.
+
+https://github.com/ssokolow/timeclock/blob/3bb9889...
+
+First, it assigns the cleanup function to sys.exitfunc so it'll get called on clean exit, then it hooks all the common POSIX signals the kernel might send s ensure that they trigger a clean exit.
+
+* SIGINT is sent by Ctrl+C, which INTerrupts the program.
+* SIGTERM is sent by things like task managers politely asking your program to TERMinate itself.
+* SIGHUP is sent by the kernel when your program loses the terminal it's attached to.
+* SIGQUIT is sent by Ctrl+\, which asks the program to quit and dump core if core dumping is enabled.
+
+(My code technically doesn't handle SIGQUIT properly, since it doesn't dump core, but I've never seen people using it properly.)
+
+Finally, it also uses try/except to catch Ctrl+C, just to play it safe. (And it's still not perfect because PyGTK doesn't let the program attach a handler for "lost connection to X server")
+
+If you want a version that's a bit more complicated, but also works on Windows, look at this revision:
+
+https://github.com/ssokolow/timeclock/blob/7a50500...
+
+(It checks that each signal exists before hooking it)

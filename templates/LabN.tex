@@ -1,0 +1,41 @@
+\documentclass{article}\usepackage{graphicx} % new way of doing eps files
+\usepackage{listings} % nice code layout
+\usepackage[usenames]{color} % color
+\definecolor{listinggray}{gray}{0.9}
+\definecolor{graphgray}{gray}{0.7}
+\definecolor{ans}{rgb}{1,0,0}
+\definecolor{blue}{rgb}{0,0,1}
+% \Verilog{title}{label}{file}
+\newcommand{\Verilog}[3]{
+  \lstset{language=Verilog}
+  \lstset{backgroundcolor=\color{listinggray},rulecolor=\color{blue}}
+  \lstset{linewidth=\textwidth}
+  \lstset{commentstyle=\textit, stringstyle=\upshape,showspaces=false}
+  \lstset{frame=tb}
+  \lstinputlisting[caption={#1},label={#2}]{#3}
+}
+
+
+\author{your name}
+\title{title}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+Introduction with problem overview, your design procedure, and rationale.
+\section{Interface}
+This section explains the input and output relationships of the design, so it can be treated as a black box.  How will the user interact with your design?  What inputs, such as switches, are used and how?  What outputs, such as LEDs, are used and how?  What sequence does the user need to proceed to get the design to perform?  What form does the data get sent in (binary, two's compliment, excess code, etc.)?
+\section{Design}
+This is the internal design of the item.  Design description and explanation, including any relevant block diagrams, ASM charts, etc.
+\section{Implementation}
+The verilog code and explanations of why you implemented this way.  There are many ways to implement a given design in verilog.  For instance why choose a case statement or ifs?  Why did you trigger on a negedge verses any signal change?
+\section{Test Bench Design}
+This is where you discuss the test benches you wrote, and what they were designed to test.  You should discuss expected errors as well as random errors.  Be sure to include your verilog code.
+\section{Simulation}
+In this section you should show the results of your simulation, such as timing diagrams and explain any design issues you had to deal with before implementation on the FPGA.
+\section{FPGA Realization and Final Verification}
+Discuss the final implementation issues including the FPGA pin configuration files and programming the board.  Once programmed how did you verify functioning?
+\section{Conclusions}
+Overview the main points you want to stick in peoples minds and answer key questions you want to stick in peoples minds.  Did it work?  How well? What would you have done differently?  What did you learn?
+\end{document} 
