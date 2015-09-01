@@ -1,0 +1,40 @@
+\chapter{One Wire Thermometer}
+
+\section{Add One Wire Support}
+
+First you need to edit the boot configuration file to add one wire support.
+
+\CommandLine{sudo nano /boot/config.txt}
+
+Scroll to the bottom (use the down arrow), then type \textbf{dtoverlay=w1-gpio}.
+Save by typing \textbf{ctrl-o} then exit with \textbf{ctrl-x}.
+
+Now reboot to make your changes active.
+
+
+\CommandLine{sudo reboot}
+
+\section{Test It}
+
+
+\CommandLine{sudo modprobe w1-gpio}
+
+\CommandLine{sudo modprobe w1-therm}
+
+
+
+\CommandLine{cd /sys/bus/w1/devices}
+
+\CommandLine{ls}
+
+Note that the next directory has a really long name, and incorporates the device number so it is not constant on all systems.  This allows multiple to be connected.
+
+
+\CommandLine{cd 28*}
+
+
+\CommandLine{cat \url{w1_slave}}
+
+\section{Code It}
+
+\Code{Read from a One Wire Thermometer.}{code:w1}{../labs/lab_02/w1temp.py}{Python} 
