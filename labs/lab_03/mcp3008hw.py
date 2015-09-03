@@ -38,6 +38,6 @@ try:
     print("Opamp: {} ({}V)".format(opamp_level,opamp_volts))
     time.sleep(delay)
 except KeyboardInterrupt:
-		pass
+  pass
 
-	GPIO.cleanup()
+GPIO.cleanup()
