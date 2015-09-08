@@ -41,7 +41,7 @@ data = []
 # This just simulates reading from a socket.
 def data_listener():
   while True:
-    for i in range(8)
+    for i in range(8):
       data[i].append(ConvertVolts(ReadMCP3008(i)))
     time.sleep(delay)
 
