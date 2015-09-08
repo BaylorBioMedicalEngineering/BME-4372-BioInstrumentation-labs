@@ -36,31 +36,36 @@ Hz=1000
 delay = 1.0/float(Hz)
 
 
-data = []
+data = [[0] for i in range(8)]
+for i in range (8):
+  data[i][0]=ConvertVolts(ReadMCP3008(i))
 
 # This just simulates reading from a socket.
-def data_listener():
+def get_data():
   while True:
     for i in range(8):
       data[i].append(ConvertVolts(ReadMCP3008(i)))
     time.sleep(delay)
 
 if __name__ == '__main__':
-try:
-  #put data reader in a thread so it can run simultaneous
-  thread = threading.Thread(target=data_listener)
-  thread.daemon = True
-  thread.start()
-  #setup plt and make interactive
-  plt.figure()
-  ln = plt.plot([])[0]
-  plt.ion()
-  plt.show()
-  #keep plotting
-  while True:
-    plt.pause(1)
-    ln.set_xdata(range(len(data)))
-    ln.set_ydata(data[0])
-    plt.draw()
-except KeyboardInterrupt:
-  spi.close()
+  try:
+    get_data()
+    get_data()
+    #put data reader in a thread so it can run simultaneous
+    thread = threading.Thread(target=get_data)
+    thread.daemon = True
+    thread.start()
+    #setup plt and make interactive
+    plt.figure()
+    ln = plt.plot([])[0]
+    plt.ion()
+    plt.show()
+    #keep plotting
+    while True:
+      plt.pause(1)
+      ln.set_xdata(range(len(data)))
+      ln.set_ydata(data[0])
+      plt.draw()
+  except KeyboardInterrupt:
+    thread.clear()
+    spi.close()
