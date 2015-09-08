@@ -3,6 +3,11 @@
 import spidev
 import time
 import os
+import matplotlib.pyplot as plt
+import threading
+import numpy
+
+
 
 spi = spidev.SpiDev()
 spi.open(0,0)
@@ -30,12 +35,32 @@ def ConvertVolts(data):
 Hz=1000
 delay = 1.0/float(Hz)
 
-try:
+
+data = []
+
+# This just simulates reading from a socket.
+def data_listener():
   while True:
-    opamp_level = ReadMCP3008(0)
-    opamp_volts = ConvertVolts(opamp_level)
-    print "--------------------------------------------"
-    print("Opamp: {} ({}V)".format(opamp_level,opamp_volts))
+    for i in range(8)
+      data[i].append(ConvertVolts(ReadMCP3008(i)))
     time.sleep(delay)
+
+if __name__ == '__main__':
+try:
+  #put data reader in a thread so it can run simultaneous
+  thread = threading.Thread(target=data_listener)
+  thread.daemon = True
+  thread.start()
+  #setup plt and make interactive
+  plt.figure()
+  ln = plt.plot([])
+  plt.ion()
+  plt.show()
+  #keep plotting
+  while True:
+    plt.pause(1)
+    ln.set_xdata(range(len(data)))
+    ln.set_ydata(data[0])
+    plt.draw()
 except KeyboardInterrupt:
   spi.close()
