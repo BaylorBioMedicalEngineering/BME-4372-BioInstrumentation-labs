@@ -4,7 +4,6 @@ import spidev
 import time
 import os
 import matplotlib.pyplot as plt
-import threading
 import numpy
 
 
@@ -21,8 +20,8 @@ spi.open(0,0)
 # add xmit[2] =  000000A987654321
 def ReadMCP3008(channel):
   xmit = spi.xfer2([1,(8+channel)<<4,0])
-  data = ((xmit[1]&3) << 8) + xmit[2]
-  return data
+  cdata = ((xmit[1]&3) << 8) + xmit[2]
+  return cdata
 
 # volts is from a 10 bit (2^10-1=1023), Vref=3.3
 # note 10 bits is approx 3 decimal places
@@ -31,41 +30,40 @@ def ConvertVolts(data):
   return volts
 
 
-#sample rate (approximate)
+data = [[0] for i in range(8)]
+for i in range(8):
+  data[i][0]=ConvertVolts(ReadMCP3008(i))
+
 Hz=1000
 delay = 1.0/float(Hz)
 
 
-data = [[0] for i in range(8)]
-for i in range (8):
-  data[i][0]=ConvertVolts(ReadMCP3008(i))
-
-# This just simulates reading from a socket.
 def get_data():
-  while True:
     for i in range(8):
       data[i].append(ConvertVolts(ReadMCP3008(i)))
-    time.sleep(delay)
 
-if __name__ == '__main__':
-  try:
+
+#if __name__ == '__main__':
+try:
+  get_data()
+  get_data()
+  #setup plt and make interactive
+  plt.ion()
+  fig=plt.figure()
+  ln0 = plt.plot(range(len(data[0])),data[0],'r-')[0]
+  ln1 = plt.plot(range(len(data[1])),data[1],'g-')[0]
+  plt.axis([0,len(data[0])-1,-0.1,3.6])
+  plt.show()
+  #keep plotting
+  while True:
     get_data()
-    get_data()
-    #put data reader in a thread so it can run simultaneous
-    thread = threading.Thread(target=get_data)
-    thread.daemon = True
-    thread.start()
-    #setup plt and make interactive
-    plt.figure()
-    ln = plt.plot([])[0]
-    plt.ion()
-    plt.show()
-    #keep plotting
-    while True:
-      plt.pause(1)
-      ln.set_xdata(range(len(data)))
-      ln.set_ydata(data[0])
-      plt.draw()
-  except KeyboardInterrupt:
-    thread.clear()
-    spi.close()
+    plt.pause(1)
+    ln0.set_xdata(range(len(data[0])))
+    ln0.set_ydata(data[0])
+    ln1.set_xdata(range(len(data[1])))
+    ln1.set_ydata(data[1])
+    plt.axis([0,len(data[0])-1,-0.1,3.6])
+    fig.canvas.draw()
+    time.sleep(delay)
+except KeyboardInterrupt:
+  spi.close()
