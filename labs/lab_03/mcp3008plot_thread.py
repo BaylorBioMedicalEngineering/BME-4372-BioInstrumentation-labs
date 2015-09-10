@@ -6,8 +6,13 @@ import os
 import matplotlib.pyplot as plt
 import threading
 import numpy
+import RPi.GPIO as GPIO
 
+SigPin = 4
 
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(SigPin, GPIO.OUT)
 
 spi = spidev.SpiDev()
 spi.open(0,0)
@@ -46,15 +51,25 @@ def get_data():
     for i in range(8):
       data[i].append(ConvertVolts(ReadMCP3008(i)))
     time.sleep(delay)
+    
+def square_wave():
+  while True:
+    GPIO.output(ledPin,GPIO.HIGH)
+    time.sleep(delay)
+    GPIO.output(ledPin,GPIO.LOW)
+    time.sleep(delay)
 
 if __name__ == '__main__':
   try:
     #put data reader in a thread so it can run simultaneous
-    thread = threading.Thread(target=get_data)
-    thread.daemon = True
-    thread.start()
-    #MyThread().start()
-    #time.sleep(2)
+    thread1 = threading.Thread(target=get_data)
+    thread1.daemon = True
+    thread1.start()
+    
+    thread2 = threading.Thread(target=square_wave)
+    thread2.daemon = True
+    thread2.start()
+    
     #setup plt and make interactive
     plt.ion()
     fig=plt.figure()
@@ -75,3 +90,10 @@ if __name__ == '__main__':
       time.sleep(delay)
   except KeyboardInterrupt:
     spi.close()
+    GPIO.cleanup()
+    
+    
+    
+    
+
+
