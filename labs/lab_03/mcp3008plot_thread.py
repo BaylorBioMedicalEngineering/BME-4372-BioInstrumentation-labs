@@ -17,6 +17,7 @@ SigPin = 4
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(SigPin, GPIO.OUT)
+GPIO.output(SigPin,GPIO.LOW)
 
 spi = spidev.SpiDev()
 spi.open(0,0)
@@ -43,6 +44,8 @@ def ConvertVolts(data):
 Hz=1000
 delay = 1.0/float(Hz)
 
+SqHz=1
+sqdelay = 2.0/float(Hz)
 
 #class MyThread (threading.Thread)
 # This just simulates reading from a socket.
@@ -59,9 +62,9 @@ def get_data():
 def square_wave():
   while True:
     GPIO.output(SigPin,GPIO.HIGH)
-    time.sleep(delay)
+    time.sleep(sqdelay)
     GPIO.output(SigPin,GPIO.LOW)
-    time.sleep(delay)
+    time.sleep(sqdelay)
 
 if __name__ == '__main__':
   try:
