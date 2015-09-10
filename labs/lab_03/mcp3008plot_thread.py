@@ -84,7 +84,7 @@ if __name__ == '__main__':
     ln0 = plt.plot(range(datalen),data[0][0:datalen],'r-')[0]
     ln1 = plt.plot(range(datalen),data[1][0:datalen],'g-')[0]
     ln2 = plt.plot(range(datalen),data[2][0:datalen],'c-')[0]
-    plt.axis([0,datalen-1,ref_gnd-neg_volt-0.1,pos_volt-ref_gnd+0.1])
+    plt.axis([0,datalen-1,neg_volt-ref_gnd-0.1,pos_volt-ref_gnd+0.1])
     plt.show()
     #keep plotting
     while True:
@@ -95,7 +95,7 @@ if __name__ == '__main__':
       ln1.set_ydata(data[1][0:datalen])
       ln2.set_xdata(range(datalen))
       ln2.set_ydata(data[2][0:datalen])
-      plt.axis([0,datalen-1,ref_gnd-neg_volt-0.1,pos_volt-ref_gnd+0.1])
+      plt.axis([0,datalen-1,neg_volt-ref_gnd-0.1,pos_volt-ref_gnd+0.1])
       fig.canvas.draw()
       time.sleep(delay)
   except KeyboardInterrupt:
