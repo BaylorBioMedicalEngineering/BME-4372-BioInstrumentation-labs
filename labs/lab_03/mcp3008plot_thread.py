@@ -8,6 +8,10 @@ import threading
 import numpy
 import RPi.GPIO as GPIO
 
+pos_volt = 5
+ref_gnd=2.5
+neg_volt=0
+
 SigPin = 4
 
 GPIO.setwarnings(False)
@@ -32,7 +36,7 @@ def ReadMCP3008(channel):
 # volts is from a 10 bit (2^10-1=1023), Vref=3.3
 # note 10 bits is approx 3 decimal places
 def ConvertVolts(data):
-  volts = round((data * 3.3) / float(1023),3)
+  volts = round((data * (pos_volt-neg_volt)) / float(1023)-ref_gnd,3)
   return volts
 
 
@@ -54,9 +58,9 @@ def get_data():
     
 def square_wave():
   while True:
-    GPIO.output(ledPin,GPIO.HIGH)
+    GPIO.output(SigPin,GPIO.HIGH)
     time.sleep(delay)
-    GPIO.output(ledPin,GPIO.LOW)
+    GPIO.output(SigPin,GPIO.LOW)
     time.sleep(delay)
 
 if __name__ == '__main__':
