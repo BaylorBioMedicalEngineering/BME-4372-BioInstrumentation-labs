@@ -8,9 +8,9 @@ import threading
 import numpy
 import RPi.GPIO as GPIO
 
-pos_volt = 5
+pos_volt = 5.0
 ref_gnd=2.5
-neg_volt=0
+neg_volt=0.0
 
 SigPin = 4
 
@@ -83,7 +83,8 @@ if __name__ == '__main__':
     datalen=len(data[0])
     ln0 = plt.plot(range(datalen),data[0][0:datalen],'r-')[0]
     ln1 = plt.plot(range(datalen),data[1][0:datalen],'g-')[0]
-    plt.axis([0,datalen-1,-0.1,3.6])
+    ln2 = plt.plot(range(datalen),data[2][0:datalen],'c-')[0]
+    plt.axis([0,datalen-1,ref_gnd-neg_volt-0.1,pos_volt-ref_gnd+0.1])
     plt.show()
     #keep plotting
     while True:
@@ -92,7 +93,9 @@ if __name__ == '__main__':
       ln0.set_ydata(data[0][0:datalen])
       ln1.set_xdata(range(datalen))
       ln1.set_ydata(data[1][0:datalen])
-      plt.axis([0,datalen-1,-0.1,3.6])
+      ln2.set_xdata(range(datalen))
+      ln2.set_ydata(data[2][0:datalen])
+      plt.axis([0,datalen-1,ref_gnd-neg_volt-0.1,pos_volt-ref_gnd+0.1])
       fig.canvas.draw()
       time.sleep(delay)
   except KeyboardInterrupt:
