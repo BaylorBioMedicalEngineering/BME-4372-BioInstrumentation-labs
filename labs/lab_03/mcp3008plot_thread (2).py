@@ -8,7 +8,7 @@ import threading
 import numpy
 import RPi.GPIO as GPIO
 
-pos_volt = 3.3
+pos_volt = 5.0
 ref_gnd=2.5
 neg_volt=0.0
 
