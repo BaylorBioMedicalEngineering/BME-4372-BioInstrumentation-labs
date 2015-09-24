@@ -7,9 +7,12 @@ import threading
 import numpy
 from struct import unpack
 
+tmax=2000
 
 ser = serial.Serial('/dev/ttyAMA0',  115200, timeout = 0)	#Open the serial Port
 ser.flushInput()	# Clear the input buffer
+
+data = [0 for i in range(tmax)]
 
 def receive():
   ser.write('s')
@@ -26,12 +29,21 @@ def receive():
   numstr=''.join(num)
   return int(numstr)
 
-for ti in range(4):
+for ti in range(tmax):
   print ti
-  line0=receive()
-  print line0
+  data[ti]=receive();
 
-  
+t=range(tmax)
 
-ser.close()
+
+fig=plt.figure()
+plt.plot(t,data,'r-')
+plt.show()
+
+
+try:
+  while True:
+    time.sleep(1)
+except KeyboardInterrupt:
+  ser.close()
 

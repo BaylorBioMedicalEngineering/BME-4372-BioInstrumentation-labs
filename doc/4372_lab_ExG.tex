@@ -11,4 +11,10 @@ Open a web browser and go to \url{http://www.dexterindustries.com/Ardubecrry/get
 
 \subsection{Olimex EKG/EMG Shield}
 
-You should not have to perform any installs for this.
+You should not have to perform any installs for this.  The shield is static sensitive so be careful, and the pins are often bent so be more careful.  Disconnect power.  Insert onto the Arduberry. Connect power.  From Pi launch Ardino editor, and set the target device to an uno and the programmer to GPIO. Load arduberry ekg sketch, then program. 
+
+Now open a command window and cd to your lab 4 directory.  Run EKG.py.  This is a simple test program, that should give you 8 numbers (1-4 interspersed with something around 300).  If you get this all is well.
+
+Now connect a volunteer to the ekg leads.  L goes on the left arm, R goes on the right arm, and D goes on the right leg.  They need to be symmetrically placed, i.e. all at wrist/ankle or elbow/knee, etc.
+
+Run either the fixed (takes 2k samples then plots and holds) or plot (for dynamic plots).
