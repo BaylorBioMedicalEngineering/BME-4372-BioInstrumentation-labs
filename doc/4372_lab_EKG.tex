@@ -1,0 +1,44 @@
+\chapter{Electro-Kardio-Gram}
+
+
+\section{Setting up the Raspberry Pi}
+
+\subsection{Adding the ArduBerry}
+
+The ArduBerry is a shield that allows Raspbery Pi's to use Arduino shields.
+
+Open a web browser and go to \url{http://www.dexterindustries.com/Ardubecrry/getting-started/} and follow the instructions.  You will download and install the drivers and run a simple test script that verifies everything is working.  The brief summary is below (the website has pretty pictures to accompany this):
+
+\begin{enumerate}
+\item Stack ArduBerry on Raspberry Pi.
+\item Open terminal on the RPi, and cd to the code directory: \CommandLine{cd code}.
+\item Clone the ArduBerry git repo: \CommandLine{git clone https://github.com/DexterInd/ArduBerry.git} and when it is finished go to the scripts directory in the ArduBerry repo :\CommandLine{cd ArduBerry/script}
+\item Make the install script executable:\CommandLine{sudo chmod +x install.sh} then run it as root: \CommandLine{sudo ./install.sh} and follow prompts, pressing \CommandLine{enter} and \CommandLine{y} as needed.
+\item The system should automatically reboot.
+\item Open the Arduino IDE from the system menu.
+\item From the \textbf{Tools} menu, select the \textbf{Programmer} sub-menu, then select \textbf{RaspberryPi GPIO}.
+\item Load \textbf{blink} or another sample sketch, and press \textbf{CTRL}$+$\textbf{Shift}$+$\textbf{U} to upload (or select \textbf{Upload using Programmer} from the File menu)
+\item Verify that the LED blinks (if running blink)
+\end{enumerate}
+
+\subsection{Olimex EKG/EMG Shield}
+
+You should not have to perform any installs for this.  The shield is static sensitive so be careful, and the pins are often bent so be more careful.  Disconnect power.  Insert onto the Arduberry. Connect power.  From Pi launch Ardino editor, and set the target device to an uno and the programmer to GPIO. \textbf{Load arduberry emg sketch}, then \textbf{program}.
+
+Now open a command window and cd to your EMG directory.  Run EMG.py.  This is a simple test program, that should give you 8 numbers (1-4 interspersed with something around 300).  If you get this all is well.
+
+Now connect a volunteer to the ekg leads.  L goes on the left arm, R goes on the right arm, and D goes on the right leg.  They need to be symmetrically placed, i.e. all at wrist/ankle or elbow/knee, etc.
+
+Run either the fixed (takes 2k samples then plots and holds) or plot (for dynamic plots).
+
+\section{General Advice}
+
+Gel electrodes provide a good measure but a few basic precautions should be followed to get the best signals.
+
+\begin{itemize}
+  \item Remove oils from your skin with soap and water to improve the signal.
+  \item Don't apply lotions or creams.
+  \item Make sure you are hydrated (dry skin doesn't conduct as well).
+  \item Try to use smooth skin with minimal hair (callouses and hair make it more difficult to get a good signal).
+  \item Body fat reduces the signal, so try to find areas where the muscle is as close to the surface as possible.
+\end{itemize}
