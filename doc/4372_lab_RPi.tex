@@ -2,21 +2,31 @@
 
 Over the course of this semester we will be building a variety of medical and biological sensors.  We will be using the Raspberry Pi as our microcomputer to control them, because of its ease of use, large number of IO pins, and tons of example code to build on.  In this lab we will be introducing the Raspberry Pi and how to use it.  I am going to try to do most things in Python, due to its simplicity and extensibility, but I can't guarantee we won't have to do a little programming in another language.
 
+\section{Network}
+Your Pi either has a usb WiFi connector or built in WiFi.  In both cases you need to log into the network using the network gui.  Select it from the top right of the Pi's desktop, select the network then enter the login information.
+
 %All of our Raspberry Pi's have been set up for us by Ken Ulibari, so we all owe him a big thanks for the great job he did.  Should you ever need to install a Raspberry Pi of your own, or modify one of these, my short notes and commands examples are in Appendix~\ref{chapter:RPiRef}.
-One thing I really want to bring to your attention is the use of \textbf{git}.  Git is a version control system (VCS), that was designed by Linus Torvalds to handle the development of Linux.  I will be maintaining a git repo at github, which means you will be able to clone it and do a pull any time you want to update it.  You do not have to use git, it just saves time and is a good skill to know for industry.
 
 \section{GIT}
+One thing I really want to bring to your attention is the use of \textbf{git}.  Git is a version control system (VCS), that was designed by Linus Torvalds to handle the development of Linux.  I will be maintaining a git repo at github, which means you will be able to clone it and do a pull any time you want to update it.  You do not have to use git, it just saves time and is a good skill to know for industry.  Open up a terminal (upper left of the desktop icon is black and blue with a white \verb1>_1).  Type the following:
+
+\CommandLine{ls}
+
+If you don't see a directory named \verb1code1 then you will need to make it by typing:
 
 \CommandLine{mkdir code}
 
+Now you need to change to the code directory and get the git repo with starter code.
+
 \CommandLine{cd  code}
 
-\CommandLine{git clone \url{https://github.com/BaylorBMEELC4372BioInstrumentation/labs.git}}
+\CommandLine{git clone \url{https://github.com/BaylorBioMedicalEngineering/BME-4372-BioInstrumentation-labs.git1}}
 
 \CommandLine{cd labs}
 
 \CommandLine{ls}
 
+\subsection{Some commands for reference}
 To update from the main repository, just do a pull
 
 \CommandLine{git pull}
