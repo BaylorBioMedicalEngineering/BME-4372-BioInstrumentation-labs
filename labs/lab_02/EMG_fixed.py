@@ -40,6 +40,11 @@ fig=plt.figure()
 plt.plot(t,data,'r-')
 plt.show()
 
+f=open("output","w")
+for ti in range(tmax):
+	f.write(str(data[ti])+"\n")
+f.close()
+
 
 try:
   while True:
