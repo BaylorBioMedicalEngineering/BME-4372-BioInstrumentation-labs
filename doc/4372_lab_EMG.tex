@@ -62,9 +62,23 @@ Gel electrodes provide a good measure but a few basic precautions should be foll
 
 \section{Test}
 
-Place ground on bicep.  What happens if you use the right leg?
+You will first need to setup the arduino on the shield to respond to our code.  From the application menu, pick the first menu group and the arduino ide should be the first pick.  In it, open the arduino sketch in our lab\_02 directory.  From the file menu select upload via programmer.  You are set.
 
-Place other two on the same forearm, locating muscles for two different fingers on the same hand by extending and contracting individually and noticing muscle flexure.  What happens if you use the opposite arm?
+Now open a terminal window and type
+
+\CommandLine{cd c*/B*/l*/lab\_02}
+
+\CommandLine{sudo python EMG\_plot.py}
+
+After a second or two the plot window will open and start displaying the plot of the difference of R and L with D used as ground.  You can stop the plot with ctrl-c, though this will exit.  If you want to take a fixed data length and have the plot stay up then use
+
+\CommandLine{sudo python EMG\_fixed.py}
+
+I suggest using plot to try most of the experiments below.
+
+Start with the metal plate electrodes.  Place ground on bicep.  Place the other two on the muscle the forearm that moves the wrist - one in the middle and one near the end.  What happens if you use the right leg?  Try metal plates and gel electrodes (just do arm)?
+
+Place other two on the same forearm, one in the middle of a muscle and one near the end of the same muscle.  Locat muscles for two different fingers on the same hand by extending and contracting individually and noticing muscle flexure (i.e. I want you to do this twice).  What happens if you use the opposite arm  ?
 
 Record signals for motion and identify finger flexed by chart only.  Explain.
 
