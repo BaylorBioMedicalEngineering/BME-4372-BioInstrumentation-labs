@@ -1,2 +1,27 @@
 \chapter{Electro-Kardio-Gram}
 
+\section{Test}
+
+Use of the EKG is essentially the same as for EMG.  I have copied the basics here for convenience.  
+
+You will first need to setup the arduino on the shield to respond to our code.  From the application menu, pick the first menu group and the arduino ide should be the first pick.  In it, open the arduino sketch in our lab\_02 directory.  From the file menu select \textbf{upload via programmer}.  You are set.
+
+Now open a terminal window and type
+
+\CommandLine{cd c*/B*/l*/lab\_02}
+
+\CommandLine{sudo python EMG\_plot.py}
+
+After a second or two the plot window will open and start displaying the plot of the difference of R and L with D used as ground.  You can stop the plot with ctrl-c, though this will exit.  If you want to take a fixed data length and have the plot stay up then use
+
+\CommandLine{sudo python EMG\_fixed.py}
+
+I suggest using plot to try most of the experiments below.
+
+You may use whatever electrodes you want.  We want to measure the three main leads:
+\begin{enumerate}
+\item Left Arm - Right Arm
+\item Left Leg - Right Arm
+\item Left Leg - Left Arm
+\end{enumerate}
+The key information is to look for the 
