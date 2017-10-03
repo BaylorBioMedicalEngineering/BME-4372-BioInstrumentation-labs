@@ -2,7 +2,7 @@
 
 \section{Test}
 
-Use of the EKG is essentially the same as for EMG.  I have copied the basics here for convenience.  
+Use of the EKG is essentially the same as for EMG.  I have copied the basics here for convenience.
 
 You will first need to setup the arduino on the shield to respond to our code.  From the application menu, pick the first menu group and the arduino ide should be the first pick.  In it, open the arduino sketch in our lab\_02 directory.  From the file menu select \textbf{upload via programmer}.  You are set.
 
@@ -24,4 +24,11 @@ You may use whatever electrodes you want.  We want to measure the three main lea
 \item Left Leg - Right Arm
 \item Left Leg - Left Arm
 \end{enumerate}
-The key information is to look for the 
+The key information to look for is the direction of the heartbeat.  You can do this one of two ways:
+\begin{enumerate}
+\item Look for the two leads that are most in phase with the ideal signal drawn in class, and the actual heatbeat is between them.
+\item Look for the lead that is most out of phase with the ideal signal and the actual heatbeat is orthogonal to this.
+\end{enumerate}
+Find the quadrant of the heartbeat.
+
+
