@@ -37,10 +37,21 @@ We will be using a general purpose LM358 Op Amp.  We will connect the positive r
 
 \includegraphics[width=0.4\textwidth]{../images/lm358.jpg}
 
+To make a signal you can easily vary, use a potentiometer (pot) to make a voltage divider.  Pick a high value, which will make the current low and the signal easy to harm, thus justifying the follower circuit.  The Now hook the output of the opamp to the inverting input and the middle sweep of the potentiometer to the non-inverting input.  The resulting circuit is:
+
+\includegraphics[width=0.4\textwidth]{../images/Follower.jpg}
+
+
+\section{Non-Inverting Amplifier}
+
+The signal stays on the non-inverting input, but now we will feedback the output across a voltage divider to ground.  The middle sweep of the voltage divider will be hooked to the inverting input of the opamp.  This second op-amp controls the gain of the system.
+
+\includegraphics[width=0.6\textwidth]{../images/Non-Inverting.jpg}
+
 
 \section{Inverting Amplifier}
 
-Note we thus can't get negative voltages, but we have no choice since we don't have a negative voltage.  We can make a new reference ground by a voltage divider between 3v3 and ground across a 1k potentiometer\footnote{hook 3v3 to one outer pin and ground to the other, the center tap is the reference}, so the center will be 1v6.  Hook this to the positive input, and the rails should be connected to 3v3 and ground.  Hook the Vref on the MCP3008 to 3v3.  Now make another potentiometer voltage divider, this time running from the op amp's output to gpio 4, with the central tap going to the op amp's negative (inverting) input.
+The signal now replaces the ground on the feedback circuit (gain potentiometer), so that now the output of the opamp and the input signal are on oposite sides of the second potentiometer, and the middle sweep of the second potentiometer still goes to the inverting input.  We would normally put the ground on the positive input of the opamp, but we can't handle negative voltages, so we have to make a fake ground half way between 0V and 3V3.  We can make a new reference ground by a voltage divider between 3v3 and ground across two 7.5k ohm resistors\footnote{hook the resistorsin series and put 3v3 to one outer pin and ground to the other, the center is the reference}, so the center will be around 1v6.  Hook this to the positive input, and the rails should be connected to 3v3 and ground still.  The Vref on the MCP3008 is also still connected to 3v3.  
 
-
+\includegraphics[width=0.6\textwidth]{../images/Inverting.jpg}
 
