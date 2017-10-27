@@ -26,7 +26,7 @@ def ReadMCP3008(channel):
 # volts is from a 10 bit (2^10-1=1023)
 # note 10 bits is approx 3 decimal places
 def ConvertVolts(din):
-  volts = round((mysig * 3.3) / float(1023),3)
+  volts = round((din * 3.3) / float(1023),3)
   return volts
 
 
@@ -68,6 +68,11 @@ if __name__ == '__main__':
       fig.canvas.draw()
       time.sleep(delay)
   except KeyboardInterrupt:
+    f=open("output","w")
+    datalen=len(data[0])-1
+    for ti in range(datalen):
+      f.write(str(data[0][ti])+"\n")
+    f.close()
     spi.close()
     GPIO.cleanup()
     

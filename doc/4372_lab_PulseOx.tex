@@ -1,7 +1,15 @@
 \chapter{Pulse Oximeter (2B)}
 
 \section{Background}
-Hemoglobin is a protein in red blood cells that reacts to oxygen forming oxyhemoglobin (HbO$_2$).  When not oxygenated hemoglobin is referred to as deoxyhemoglobin (Hb).  Pulse oximetry is a non-invasive way to measure the amount of oxygen dissolved in the blood, which is called the oxygen saturation (SpO$_2$). Oxygen saturation is measured by detecting Hb and HbO$_2$, using their absorption sectra at two different frequencies (typically red around 660nm and infrared around 840nm to 940nm).  These values were selected because Hb has higher absorption of red light and HbO$_2$ has higher absorption of infrared, see figure~\ref{fig-spectrum}.
+Hemoglobin is a protein in red blood cells that reacts to oxygen forming oxyhemoglobin (HbO$_2$).  When not oxygenated hemoglobin is referred to as deoxyhemoglobin (Hb).  Based on their structure, materials absorb photons of various wavelengths in differing amounts and this can be used to uniquely identify them, this is spectroscopy.  In the near infrared, there is a narrow window, called the optical window or near infrared window, between about 660nm to 1300nm, where low energy photons can penetrate 2 to 3 cm, which is deep enough to make measurements of materials in the body, see figure~\ref{fig-optical-window}.  Even bone is translucent in this range allowing the surface of the brain to be measured\footnote{This is called NIRS for Near InfraRed Spectroscopy, and when used to determine the functional behavior of the brain, it is called fNIRS for functional NIRS.  The source and detector must be right on the scalp for this work, but it is a useful technique my research group is using to monitor brain health.}.
+
+ \begin{figure}
+ \caption{Near infrared optical window.  \emph{From Hamblin MR, Demidova TN. Mechanisms of low level light therapy. Proc. of SPIE Photonics. 2006.}}
+ \label{fig-optical-window}
+ \includegraphics{../images/1669_fig1.jpg}
+ \end{figure}
+
+Pulse oximetry is a non-invasive way to measure the amount of oxygen dissolved in the blood, which is called the oxygen saturation (SpO$_2$). Oxygen saturation is measured by detecting Hb and HbO$_2$, using their absorption sectra at two different frequencies (typically red around 660nm and infrared around 840nm to 940nm).  These values were selected because Hb has higher absorption of red light and HbO$_2$ has higher absorption of infrared, see figure~\ref{fig-spectrum}.
 
  \begin{figure}
  \caption{Absorption spectra of oxyhemoglobin and deoxyhemoglobin. \emph{Image by Adrian Curtin used under  Creative Commons Attribution-Share Alike 3.0 Unported License.}}

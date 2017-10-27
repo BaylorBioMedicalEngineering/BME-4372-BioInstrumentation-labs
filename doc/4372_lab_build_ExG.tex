@@ -21,15 +21,18 @@ The positive and negative rail will be powered by a 9v battery. This will do two
 \item you will be isolated from wall power, greatly increasing your safety.
 \item the circuit will have a bigger voltage swing, which will make the amplifier's job much easier.
 \end{enumerate}
-We will connect the negative battery lead to the Raspberry Pi's ground\footnote{In a commercial circuit we would put this through an optocoupler or similar to provide further safety.  The setup we are using should only be used for EMG on the same arm with people who don't have a pacemaker. In extreme circumstances such as a lightning strike to ground current could come back from the ground.  The amount of current to cause problems is lower if the heart is between any of the probes (hence only use for one arm) and even more with arrythmia that requires a pacemaker or similar.} We will make a false ground for the instrumentation amp using the 500k potentiometer and the 9v battery, setting the false ground around 1.4 volts.
+We will connect the negative battery lead to the Raspberry Pi's ground\footnote{In a commercial circuit we would put this through a large resistor or an isolator.  We can't do that for R and L, since they tuned the 4k$\$Omega$ input to their capacitors, so if we put another resistor to bring it to the 80k$\Omega$ plus range it would change the low pass filter (LPF) to have a significantly reduced corner frequency and thus additional noise.  The setup we are using should only be used for EMG on the same arm with people who don't have a pacemaker. In extreme circumstances such as a lightning strike to ground current could come back from the ground and short a component redirecting current to any of the leads.  The amount of current to cause problems is lower if the heart is between any of the probes (hence only use for one arm) and even more with arrythmia that requires a pacemaker or similar.} We will make a false ground for the instrumentation amp using the 500k potentiometer and the 9v battery, setting the false ground around 1.4 volts.  Note the audio connector has the following pinout, so you can connect it.
+
+
+\includegraphics[width=.3\textwidth]{../images/audio_jack.jpg}
 
 \section{Graphing}
 
-This circuit is much more power hungry than the simple circuits we used, and so you will notice a difference in the plotting efficency, since the Raspberry Pi will run slower.  To counter this we need to go to a more efficient piece of code.  Our current code uses one thread that takes in data and plots.  It is more efficient to make two threads - one that takes in data and puts it in the array, and one that just plots data.  This is implemented in the MCP3008thread[1-3].py code.  The first two are more generic, while the third is special of our case - it plots one line and has our values preset, so use it.
+This circuit is much more power hungry than the simple circuits we used, and so you will notice a difference in the plotting efficency, since the Raspberry Pi will run slower.  To counter this we need to go to a more efficient piece of code.  Our current code uses one thread that takes in data and plots.  It is more efficient to make two threads - one that takes in data and puts it in the array, and one that just plots data.  This is implemented in the MCP3008thread[1-4].py code.  The first two are more generic, while the third is special of our case - it plots one line and has our values preset, and saves a file with the data when you exit, so use it.  The fourth takes a fixed count of 20000 data points so you can save the figure.
 
-\CommandLine{cd c*/B*/p*/*3}
+\CommandLine{cd c*/B*/l*/*3}
 
-\CommandLine{sudo python MCP3008thread3.py}
+\CommandLine{sudo python MCP3008plot_thread3.py}
 
 Plot the data for the same muscle group you did on the EMG shield and compare how easy it is to make out the muscle contractions.  Compare the quality of the two circuits.
 
