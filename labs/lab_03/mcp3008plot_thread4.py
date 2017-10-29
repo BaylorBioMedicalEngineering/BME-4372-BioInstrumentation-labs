@@ -39,10 +39,11 @@ def get_data():
   global data
   global gathering
   gathering=1
+  tmax=5000
   data = [[0 for t in range(tmax)] for i in range(8)]
   for t in range(tmax):
     for i in range(8):
-      data[i].append(ConvertVolts(ReadMCP3008(i)))
+      data[i][t]=ConvertVolts(ReadMCP3008(i))
     time.sleep(delay)
   gathering=0
 
@@ -62,18 +63,22 @@ if __name__ == '__main__':
     plt.show()
     #keep plotting
     while gathering:
-      datalen=len(data[0])-1
-      ln0.set_xdata(range(datalen))
       ln0.set_ydata(data[0][0:datalen])
       plt.axis([0,datalen-1,-0.1,3.6])
       fig.canvas.draw()
       time.sleep(delay)
-  except KeyboardInterrupt:
     f=open("output","w")
     datalen=len(data[0])-1
     for ti in range(datalen):
       f.write(str(data[0][ti])+"\n")
     f.close()
+    ln0.set_ydata(data[0][0:datalen])
+    plt.axis([0,datalen-1,-0.1,3.6])
+    fig.canvas.draw()
+    fig.savefig('myplot.png')
+    spi.close()
+    GPIO.cleanup()
+  except KeyboardInterrupt:
     spi.close()
     GPIO.cleanup()
     
